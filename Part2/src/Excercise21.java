@@ -24,7 +24,7 @@ public class Excercise21 {
 
     public static void main(String[] args) {
         Excercise21 test = new Excercise21();
-        int[] nums = new int[] { -1, 2, 3 };
+        int[] nums = new int[] { 1, 2 };
         Float result;
         try {
             result = test.avg(nums);
