@@ -1,6 +1,3 @@
-package fi.utu.tech.ooj.exercise4.exercise1;
-
-import fi.utu.tech.ooj.exercise4.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,17 +14,21 @@ import java.util.zip.ZipInputStream;
 // also marked with WORKAROUND comments.
 
 /**
-
-A class that models unzipping (extracting a compressed zip package).
-<p>
-The idea is that while an object of the class exists, there is also a temporary directory
-created by the object on the disk. When the object is closed, the directory is also deleted.
-<p>
-How to use it? Create an object. Creation assumes that the zip file must exist.
-The class's 'run' method activates the unzipping. Finally, close the object ('close').
-<p>
-Hint: closing is easy with Java's try-with-resources feature.
-*/
+ * 
+ * A class that models unzipping (extracting a compressed zip package).
+ * <p>
+ * The idea is that while an object of the class exists, there is also a
+ * temporary directory
+ * created by the object on the disk. When the object is closed, the directory
+ * is also deleted.
+ * <p>
+ * How to use it? Create an object. Creation assumes that the zip file must
+ * exist.
+ * The class's 'run' method activates the unzipping. Finally, close the object
+ * ('close').
+ * <p>
+ * Hint: closing is easy with Java's try-with-resources feature.
+ */
 abstract public class Zipper implements AutoCloseable {
     // zip-file for unzipping
     private final String zipFile;
@@ -43,7 +44,8 @@ abstract public class Zipper implements AutoCloseable {
      * creates a temporary directory 'tempDirectory'.
      *
      * @param zipFile Zip file path (precondition: must exist and be non-null).
-     * @throws IOException If the zip file is not found or the temporary directory cannot be created.
+     * @throws IOException If the zip file is not found or the temporary directory
+     *                     cannot be created.
      */
     public Zipper(String zipFile) throws IOException {
         // WORKAROUND: if the zip file is not found, comment out the next two lines.
@@ -84,7 +86,7 @@ abstract public class Zipper implements AutoCloseable {
         // WORKAROUND: If the zip file is not found, change to the following
         // try (final var inputStream = new FileInputStream(zipFile);
         try (final var inputStream = resolver.getResourceAsStream(zipFile);
-             final var stream = new ZipInputStream(inputStream)) {
+                final var stream = new ZipInputStream(inputStream)) {
             var zipEntry = stream.getNextEntry();
             while (zipEntry != null) {
                 final var newFile = new File(destinationDir, zipEntry.getName());
@@ -166,4 +168,3 @@ abstract public class Zipper implements AutoCloseable {
         abstract public void handle() throws IOException;
     }
 }
-
